@@ -2,7 +2,7 @@
 Convient in use color picker
 
 ## Installation
-- git clone version 1.0 branch
+- git clone branch of version 1.0 
 - run installation script
 
 ```sh
