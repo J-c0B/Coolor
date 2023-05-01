@@ -22,7 +22,7 @@ Examples :
 coolor --hex 43afbc
 ```
 
--decimal
+- decimal
 ```sh
 coolor --hex 067176188
 ```
