@@ -8,7 +8,7 @@ Convient in use color picker
 ```sh
 git clone --single-branch --branch 1.0 https://github.com/J-c0B/Coolor.git
 cd Coolor
-./install.sh
+sudo ./install.sh
 
 ```
 
