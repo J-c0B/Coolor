@@ -27,7 +27,7 @@ coolor --hex 43afbc
 coolor --dec 067176188
 ```
 
-## Remove
+## Uninstall
 - run uninstall script with sudo permission
 - remove the Coolor directory
 
