@@ -24,7 +24,7 @@ coolor --hex 43afbc
 
 - decimal
 ```sh
-coolor --hex 067176188
+coolor --dec 067176188
 ```
 
 ## Remove
