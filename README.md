@@ -1,5 +1,5 @@
 # Coolor
-Convient in use color picker
+Convenient in use color picker
 
 ## Installation
 - git clone branch of version 1.0 
