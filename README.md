@@ -9,7 +9,7 @@ Simple colour picker
 ```
 
 ## Usage
-Coolor was meant to provide a preview of colors represented in hexadecimal and decimal color notations.
+Coolor was meant to provide a preview of colours represented in hexadecimal and decimal colour notations.
 Other functionalities will be provided soon.
 
 Examples :
