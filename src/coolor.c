@@ -1,192 +1,152 @@
 /*
 *
-*   COOLORS
+*   COOLOR
+*   Simple colour picker    
 * 
 *  -> made by : J-c0b
 *  -> github : https://github.com/J-c0B
-*  -> email : n.hetma.n.7@gmail.com 
+*  -> email : gjak2700@gmail.com 
 *
 *
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
 #include <unistd.h>
 #include <string.h>
-#include <errno.h>
+#include <ctype.h>
+#include <math.h>
 
+#define ARG1 "--help"
+#define ARG2 "--hex"
+#define ARG3 "--dec"
+#define ARG4 "--install"
+#define ARG5 "--uninstall"
 
-#define command1 "--help"
-#define command2 "--hex"
-#define command3 "--dec"
-
-int hex(char c);
+void hex(char c[],short int colour[]);
+void dec(char c[],short int colour[]);
+void printc(short int colour[]);
 void err(int code);
 
+short int colour[3];
 
 int main(int argc, char * argv[])
 {   
     setlocale(LC_ALL, "");
-   
 
-
-if(argv[1] != NULL)
+if(argc>1)
 {
-    if (argv[2] != NULL)
-    {
-
     
-if (strcmp(argv[1],command1) == 0)
+if (strcmp(argv[1],ARG1) == 0)
 {
 
-puts(" ");                                                                                                                      //
-puts("  *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");                                                            //
-puts(" ");                                                                                                                      //
-puts("  Options : ");                                                                                                           //
-puts(" ");                                                                                                                      //
-puts(" ");                                                                                                                      //
-puts("       --help  : Shows all available arguments");                                                                         // I could do it better
-puts(" ");                                                                                                                      //
-puts("       --hex   :   Shows color from hexadecimal color representation . example : FFFFFF ( without '#' )");                //
-puts(" ");                                                                                                                      //
-puts("       --dec   :    Shows color from decimal color representation . example : 052012034 ( without ',' )");                //
-puts(" ");                                                                                                                      //
-puts("   *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");                                                           //
+printf("Options \n");
+printf("\t--help  Shows all available arguments\n");
+printf("\t--hex   Shows colour from hexadecimal color notation\n");
+printf("\t--dec   Shows colour from decimal colour notation\n");
+printf("\t--install  Performs an installation into a system (no need to keep the downloaded file to run after that)\n");
+printf("\t--uninstall Removes the program from the system");
 
 }
-else if (strcmp(argv[1],command2) == 0)
+else if (strcmp(argv[1],ARG2) == 0)
 {
-  
-   char color[6];
-    
-    int rgb[3];
-
-    if(strlen(argv[2]) <= 6)
-    {
-        strcpy(color , argv[2]);
-
-    rgb[0] = hex(color[0])*16 + hex(color[1]);                    //
-     rgb[1] = hex(color[2])*16 + hex(color[3]);                   // Also this <-
-      rgb[2] = hex(color[4])*16 + hex(color[5]);                  //
-
-    
-    printf("\x1B[38;2;%i;%i;%im",rgb[0],rgb[1],rgb[2]);
-    puts("|");
-    printf("|\n");
-    puts("|");
-    puts("|->  █████████");
-    }
-    else
-    {
-        err(1);
-    }
-   
+hex(argv[2],colour);
 }
-else if(strcmp(argv[1],command3) == 0) 
-{   
+else if(strcmp(argv[1],ARG3) == 0) 
+{ 
 
-    char color[9];
- 
-    if(strlen(argv[2]) <= 9)
+if(argc >= 5)
+    for(int i = 2;i<5;i++)
     {
-           strcpy(color , argv[2]);
-        char red[4] = {color[0],color[1],color[2]}, green[4]= {color[3],color[4],color[5]} ,blue[4]= {color[6],color[7],color[8]} ;  // And this <- but for a small project , it just doesn't matter
-    
-    printf("\x1B[38;2;%s;%s;%sm",red,green,blue);
-   puts("|"); 
-   printf("|\n");
-   puts("|");
-   puts("|->  █████████");
-    
-    
+    dec(argv[i],colour);
     }
-    else
-    {
-        err(1);
-    }
-
-}
 else
+    err(2);
+
+}
+else if(strcmp(argv[1],ARG4) == 0)
 {
-
-err(0);
-
+system("sudo ./install.sh");
+}
+else if(strcmp(argv[1],ARG5) == 0)
+{
+system("sudo /usr/bin/coolor");
 }
 
 }
 else
-{
-
-    err(0);
-}
-
-}
-else
-{
     err(1);
-}
-  printf("\x1B[0m\n");
+printc(colour);
 return 0;
 }
 
-
-int hex(char c)
+void dec(char c[],short int colour[])
 {
- char hex[6] = {'A','B','C','D','E','F'};
- char hex_lowercase[6] = {'a','b','c','d','e','f'}; 
-
-for(int x = 0;x<sizeof(hex);x++)
+    static int ccount = 0;
+    int p = strlen(c)-1;
+if(c != NULL)
 {
-
-if(c == hex[x])
-{
-
-return 10 + x;
-break;
-
+    for(int i =0;i<3&&c[i]>='0';i++)
+    {
+        colour[ccount] += pow(10,p)*(c[i]-'0');
+        p--;
+    }
+    ccount += (ccount<3)?1:0;
 }
-else if (c == hex_lowercase[x])
-{
-
-return 10 + x;
-break;
+else
+    err(2);
 
 }
 
 
-}
 
-return (c - '0');
+void hex(char c[],short int colour[])
+{
+int i = -1,p;
+
+if(c != NULL)
+    for(int n = 0;c[n] != '\0';n++)
+    {
+
+    i += (n%2==0) ? 1:0;
+    p = (n%2==0) ? 1:0;
+
+    if(c[n]>'9')
+    {
+       colour[i] += pow(16,p)*(10+(tolower(c[n])-'a'));
+    }
+    else
+    {
+        colour[i] += pow(16,p)*(c[n]-'0');
+    }
+    }
+else 
+    err(2);
+
 }
 
 void err(int code)
 {
-
-if(code ==0)
+printf("Error:\t");
+if(code ==1)
 {
-
-printf("\x1B[0m\n");
-errno = 3;
-puts(" ");
-puts  ("||                                                            ||");
-perror("'' Invalid argument , choose --help for more information .... ''");
-exit(1);
-
+printf("\x1B[0m");
+printf("Invalid argument , type --help for more information");
+exit(0);
 }
 else
 {
+printf("\x1B[0m");
+printf("Invalid colour lenght");
+exit(0);
+}
+}
 
+void printc(short int colour[])
+{
+printf("red : %i , green : %i , blue %i\n",colour[0],colour[1],colour[2]);
+printf("\x1B[38;2;%i;%i;%im",colour[0],colour[1],colour[2]);
+printf("█████████\n");
 printf("\x1B[0m\n");
-errno = 2;
-puts(" ");
-puts  ("||                                ||");
-perror("'' Color lenght out of range .... ''");
-exit(1);
-
-
 }
-
-
-}
-
-
