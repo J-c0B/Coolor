@@ -1,38 +1,31 @@
 # Coolor
-Convenient in use color picker
+Simple colour picker
 
-## Installation
-- git clone branch of version 1.0 
-- run installation script with sudo permission
-
+## Installation 
+- download the latest release ( git clone ) 
+- run the program with --install argument
 ```sh
-git clone --single-branch --branch 1.0 https://github.com/J-c0B/Coolor.git
-cd Coolor
-sudo ./install.sh
-
+./coolor --install
 ```
 
 ## Usage
-Coolor was made to provide quick preview of colors represented in hexadecimal or decimal color notation.
+Coolor was meant to provide a preview of colors represented in hexadecimal and decimal color notations.
+Other functionalities will be provided soon.
 
 Examples :
 
-- hexadecimal
+- hexadecimal ( do not combine the colour with a # sing )
 ```sh
 coolor --hex 43afbc
 ```
 
 - decimal
 ```sh
-coolor --dec 067176188
+coolor --dec 67 176 18
 ```
 
-## Uninstall
-- run uninstall script with sudo permission
-- remove the Coolor directory
-
+## Uninstallation
+- simply run the program with --uninstall argument
 ```sh
-sudo ./uninstall.sh
-cd ..
-rm -R Coolor
+coolor --uninstall
 ```
