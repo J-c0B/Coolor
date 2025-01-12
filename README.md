@@ -2,7 +2,7 @@
 Simple colour picker
 
 ## Installation 
-- download the latest release ( git clone ) 
+- download the latest release
 - run the program with --install argument
 ```sh
 ./coolor --install

@@ -52,6 +52,7 @@ printf("\t--uninstall Removes the program from the system");
 else if (strcmp(argv[1],ARG2) == 0)
 {
 hex(argv[2],colour);
+printc(colour);
 }
 else if(strcmp(argv[1],ARG3) == 0) 
 { 
@@ -64,20 +65,23 @@ if(argc >= 5)
 else
     err(2);
 
+printc(colour);
 }
 else if(strcmp(argv[1],ARG4) == 0)
 {
-system("sudo ./install.sh");
+char cpath[256];
+getcwd(cpath,sizeof(cpath));
+chdir(cpath);
+system("sudo ln coolor /usr/bin/coolor");
 }
 else if(strcmp(argv[1],ARG5) == 0)
 {
-system("sudo /usr/bin/coolor");
+system("sudo rm /usr/bin/coolor");
 }
 
 }
 else
     err(1);
-printc(colour);
 return 0;
 }
 
@@ -145,7 +149,7 @@ exit(0);
 
 void printc(short int colour[])
 {
-printf("red : %i , green : %i , blue %i\n",colour[0],colour[1],colour[2]);
+// printf("red : %i , green : %i , blue %i\n",colour[0],colour[1],colour[2]);  /* For testing purposes */ 
 printf("\x1B[38;2;%i;%i;%im",colour[0],colour[1],colour[2]);
 printf("█████████\n");
 printf("\x1B[0m\n");
