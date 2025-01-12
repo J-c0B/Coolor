@@ -1,5 +1,5 @@
 # Coolor
-Simple colour picker
+Simple colour displayer
 
 ## Installation 
 - download the latest release

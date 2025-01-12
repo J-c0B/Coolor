@@ -1,7 +1,7 @@
 /*
 *
 *   COOLOR
-*   Simple colour picker    
+*   Simple colour displayer    
 * 
 *  -> made by : J-c0b
 *  -> github : https://github.com/J-c0B
